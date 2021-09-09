@@ -1,7 +1,7 @@
 ARG ARCH="amd64"
-ARG TAG="v3.7.1"
-ARG UBI_IMAGE=registry.access.redhat.com/ubi7/ubi-minimal:latest
-ARG GO_IMAGE=rancher/hardened-build-base:v1.15.8b5
+ARG TAG="v3.7.2"
+ARG UBI_IMAGE
+ARG GO_IMAGE
 
 # Build the multus project
 FROM ${GO_IMAGE} as builder
@@ -20,7 +20,9 @@ RUN git clone --depth=1 https://github.com/k8snetworkplumbingwg/multus-cni \
 
 # Create the multus image
 FROM ${UBI_IMAGE}
-RUN microdnf update -y && microdnf install python
+RUN yum update -y && \
+    yum install -y python && \
+    rm -rf /var/cache/yum
 COPY --from=builder /go/multus-cni /usr/src/multus-cni
 WORKDIR /
 RUN cp /usr/src/multus-cni/images/entrypoint.sh /entrypoint.sh
