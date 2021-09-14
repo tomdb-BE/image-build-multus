@@ -20,8 +20,7 @@ RUN git clone --depth=1 https://github.com/k8snetworkplumbingwg/multus-cni \
 
 # Create the multus image
 FROM ${UBI_IMAGE}
-RUN yum update -y && \
-    yum install -y python && \
+RUN yum install -y python && \
     rm -rf /var/cache/yum
 COPY --from=builder /go/multus-cni /usr/src/multus-cni
 WORKDIR /
