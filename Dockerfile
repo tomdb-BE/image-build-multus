@@ -20,7 +20,7 @@ RUN git clone --depth=1 https://github.com/k8snetworkplumbingwg/multus-cni \
 
 # Create the multus image
 FROM ${UBI_IMAGE}
-RUN microdnf update -y && microdnf install python
+RUN microdnf update -y && microdnf install python38
 COPY --from=builder /go/multus-cni /usr/src/multus-cni
 WORKDIR /
 RUN cp /usr/src/multus-cni/images/entrypoint.sh /entrypoint.sh
