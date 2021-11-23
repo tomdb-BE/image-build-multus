@@ -6,9 +6,13 @@ endif
 
 BUILD_META ?= -multiarch-build$(shell date +%Y%m%d)
 ORG ?= rancher
-TAG ?= v3.7.2$(BUILD_META)
-UBI_IMAGE ?= centos:7
-GOLANG_VERSION ?= v1.16.7b7-multiarch
+UBI_IMAGE ?= registry.access.redhat.com/ubi8/ubi-minimal:latest
+GOLANG_VERSION ?= v1.16.10b7-multiarch
+TAG ?= v3.8$(BUILD_META)
+
+ifneq ($(DRONE_TAG),)
+TAG := $(DRONE_TAG)
+endif
 
 ifeq (,$(filter %$(BUILD_META),$(TAG)))
 $(error TAG needs to end with build metadata: $(BUILD_META))
