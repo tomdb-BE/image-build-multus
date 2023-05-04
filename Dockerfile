@@ -2,7 +2,7 @@ ARG ORG=rancher
 ARG ARCH="amd64"
 ARG TAG="v3.9.3"
 ARG BCI_IMAGE=registry.suse.com/bci/bci-base:15.3.17.20.12
-ARG GO_IMAGE=${ORG}/hardened-build-base:v1.18.9b7
+ARG GO_IMAGE=${ORG}/hardened-build-base:v1.20.3b1
 
 # Build the multus project
 FROM ${GO_IMAGE} as builder
