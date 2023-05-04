@@ -22,6 +22,7 @@ image-build:
 		--pull \
 		--build-arg ARCH=$(ARCH) \
 		--build-arg TAG=$(TAG:$(BUILD_META)=) \
+		--build-arg ORG=$(ORG) \
 		--tag $(ORG)/hardened-multus-cni:$(TAG) \
 		--tag $(ORG)/hardened-multus-cni:$(TAG)-$(ARCH) \
 	.
